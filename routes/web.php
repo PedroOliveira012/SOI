@@ -7,3 +7,4 @@ Route::get('/', function () {
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/add-project', [App\Http\Controllers\ProjectController::class, 'index'])->name('home');
