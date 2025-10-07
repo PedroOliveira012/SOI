@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -10,7 +11,8 @@ class HomeController extends Controller
      * Display a listing of the resource.
      */
     public function index(){
-        return view('home.home');
+        $projects = Project::all();
+        return view('home.home', ['projects' => $projects]);
     }
 
     /**
