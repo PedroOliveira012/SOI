@@ -26,28 +26,26 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $validatedData = $request->validate([
-            'number' => 'required|unique:projects',
-            'name' => 'required',
+            'project_number' => 'required',
+            'project_name' => 'required',
             'client' => 'required',
             'contact' => 'required',
-            'short-circuit_level' => 'required',
+            'short_circuit_level' => 'required',
             'dps_class' => 'required',
             'enclosure_type' => 'required',
-            'has_general_metering' => 'required|boolean',
-            'has_grounding_switch' => 'required|boolean',
-            'has_tension_testing' => 'required|boolean',
+            'has_energy_metering' => 'required|in:sim,nao',
+            'has_grounding_switch' => 'required|in:sim,nao',
+            'has_tension_testing' => 'required|in:sim,nao',
             'security_category' => 'required',
-            'has_220V_command' => 'required|boolean',
-            'circuit_breker_or_transformer' => 'required',
+            'has_220V_command' => 'required|in:sim,nao',
         ]);
-
         $project = Project::create($validatedData);
-        return response()->json($project, 201);
+        return redirect()->route('home');
+        
     }
-
+    
     /**
      * Display the specified resource.
      */
