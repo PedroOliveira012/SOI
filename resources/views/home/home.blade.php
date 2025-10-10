@@ -33,11 +33,23 @@
                 <td >
                     <p>{{ $project->project_name }}</p>
                 </td>
-                <td>
+                <td class="d-flex justify-content-center gap-3">
                     <div>
-                        <button type="button" class="btn btn-primary">
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </button>
+                        <a href="{{ url('/new-project') }}">
+                            <button type="button" class="btn btn-primary">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </a>
+                    </div>
+                    <div>
+                        <form action="{{ route('delete-project', $project) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir o projeto {{ $project->project_number }}?');">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </form>
                     </div>
                 </td>
             </tr>

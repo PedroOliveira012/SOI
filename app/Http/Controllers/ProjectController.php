@@ -43,7 +43,6 @@ class ProjectController extends Controller
         ]);
         $project = Project::create($validatedData);
         return redirect()->route('home');
-        
     }
     
     /**
@@ -73,8 +72,8 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Project $project)
-    {
-        //
+    public function destroy(Project $project){
+        $project->delete();
+        return redirect()->route('home')->with('success', 'Projeto excluído com sucesso!');
     }
 }
