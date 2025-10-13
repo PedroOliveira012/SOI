@@ -21,27 +21,25 @@
         <tbody class="table-group-divider">
             <?php foreach ($projects as $project): ?>
             <tr class="align-middle">
-                <td >
+                <td>
                     <p>{{ $project->project_number }}</p>
                 </td>
-                <td >
+                <td>
                     <p>{{ $project->client }}</p>
                 </td>
-                <td >
+                <td>
                     <p>{{ $project->contact }}</p>
                 </td>
-                <td >
+                <td>
                     <p>{{ $project->project_name }}</p>
                 </td>
-                <td class="d-flex justify-content-center gap-3">
-                    <div>
+                <td>
+                    <div class="d-flex gap-3 button-cell m-auto">
                         <a href="{{ url('/new-project') }}">
                             <button type="button" class="btn btn-primary">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </button>
                         </a>
-                    </div>
-                    <div>
                         <form action="{{ route('delete-project', $project) }}" method="POST">
                             @csrf
                             @method('DELETE')

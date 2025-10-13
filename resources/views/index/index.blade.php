@@ -9,6 +9,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous"><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/project.css') }}">
         
         <title>SOI</title>
 
@@ -19,21 +20,30 @@
         <script src="{{ asset('js/cbpFWTabs.js') }}"></script>
     </head>
     <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-            <div class="container-fluid navbar__div">
-                {{-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse navbar__div--menu" id="navbarSupportedContent">
-                    <button class="btn btn-primary btn-menu" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
-                        <i class="fa-solid fa-bars icone-menu"></i>
-                    </button>
-                </div> --}}
-                <div class="navbar__div--img">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+            <div class="container-fluid">
+                <div class="ms-4">
                     <img src="{{asset('logo/logo.png')}}" class="logo">
                 </div>
+                <button class="btn btn-primary me-5 side-menu-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#sideMenu" aria-controls="sideMenu">
+                    <i class="fa-solid fa-bars icone-menu fa-2xl"></i>
+                </button>
             </div>
         </nav>
+        <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="sideMenu" aria-labelledby="sideMenuLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="sideMenuLabel">Menu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div>
+                    <a href="{{ url('/home') }}" class="btn btn-dark w-100 mb-3">Home</a>
+                </div>
+                {{-- <div>
+                    <a href="{{ url('/home') }}" class="btn btn-dark w-100 mb-3">Edição dos kits</a>
+                </div> --}}
+            </div>
+        </div>
         @yield('content')
     </body>
 </html>

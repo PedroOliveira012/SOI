@@ -2,17 +2,24 @@ body{
     background-color: #121212;
 }
 
-.container{
-    width: 85%;
-    height: 100%;
-    color: white;
-}
-
 td>p{
     margin: 0;
     padding: 0;
 }
 
-.blank{
-    width: 15%;
+.side-menu-button{
+    background-color: #212529;
+    border: 1px solid #212529;
+    padding: 15px;
+}
+
+.side-menu-button:hover{
+    background-color: #212529 !important;
+    border: 1px solid #00aac0 !important;
+}
+
+.container{
+    width: 85%;
+    height: 100%;
+    color: white;
 }
