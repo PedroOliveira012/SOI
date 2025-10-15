@@ -10,6 +10,7 @@
         <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('css/project.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/kits.css') }}">
         
         <title>SOI</title>
 
@@ -39,9 +40,9 @@
                 <div>
                     <a href="{{ url('/home') }}" class="btn btn-dark w-100 mb-3">Home</a>
                 </div>
-                {{-- <div>
-                    <a href="{{ url('/home') }}" class="btn btn-dark w-100 mb-3">Edição dos kits</a>
-                </div> --}}
+                <div>
+                    <a href="{{ url('/kits-editing/home') }}" class="btn btn-dark w-100 mb-3">Edição dos kits</a>
+                </div>
             </div>
         </div>
         @yield('content')

@@ -14,3 +14,6 @@ Route::get('/new-project', [App\Http\Controllers\ProjectController::class, 'inde
 Route::post('/store-projects', [App\Http\Controllers\ProjectController::class, 'store'])->name('store-project');
 Route::delete('/delete/{project}', [App\Http\Controllers\ProjectController::class, 'destroy'])->name('delete-project');
 
+//Kits
+Route::get('/kits-editing/home', [App\Http\Controllers\KitsController::class, 'index'])->name('kits-editing-home');
+

@@ -1,0 +1,30 @@
+.kit-card>p{
+    margin: 0;
+}
+
+.kit-card{
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #212529;
+    border: 2px solid #00aac0;
+    border-radius: 10px;
+}
+
+.range-guide>p{
+    margin: 0;
+    /* font-size: 1rem; */
+    color: #a1a1a1;
+}
+
+.range-guide{
+    width: 30%;
+    display: flex;
+    align-items: center;
+}
+
+.kit-area{
+    width: 55%;
+}
