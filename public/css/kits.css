@@ -1,3 +1,8 @@
+.container>a{
+    text-decoration: none;
+    color: white;
+}
+
 .kit-card>p{
     margin: 0;
 }

@@ -44,9 +44,11 @@ class KitsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+
+    public function edit($kitId) // Mude o nome da variável para clareza
     {
-        //
+        $kit = Kits::find($kitId);
+        return view('kits.kits-editing-form', ['kit' => $kit]);
     }
 
     /**
