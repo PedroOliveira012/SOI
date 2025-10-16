@@ -1,3 +1,4 @@
+/* Edição de kits - Home */
 .container>a{
     text-decoration: none;
     color: white;
@@ -33,3 +34,86 @@
 .kit-area{
     width: 55%;
 }
+
+/* Edição de kits - Form */
+.tabs-div{
+    height: 606px;
+    width: fit-content;
+    overflow-y: auto;
+}
+
+.tab-vertical .nav.nav-tabs {
+    float: left;
+    display: block;
+    margin-right: 0px;
+    border-bottom: 0;
+}
+
+.tab-vertical .nav.nav-tabs .nav-item {
+    border-bottom: 2px solid #373b3e;
+}
+
+.nav-tabs .nav-link {
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+}
+
+.tab-vertical .nav-tabs .nav-link {
+    display: grid;
+    background: #fff;
+    padding: 17px 49px;
+    color: #373b3e;
+    background-color: #161a1e;
+    width: 250px;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+}
+
+.tab-vertical .nav-tabs .nav-link.active {
+    color: #00aac0;
+    background-color: #212529 !important;
+    border-left: 2px solid #00aac0 !important;
+}
+
+.tab-vertical .nav-tabs .nav-link {
+    border: 1px solid transparent;
+}
+
+.tab-vertical .tab-content {
+    overflow: auto;
+    background: #212529;
+    padding: 30px;
+    height: 606px;
+}
+
+.tabs-div::-webkit-scrollbar {
+    width: 2px;
+}
+
+.tabs-div::-webkit-scrollbar-track {
+    background: #212529;
+}
+
+.tabs-div::-webkit-scrollbar-thumb {
+    background: #d9d9d9;
+    /* border-radius: 4px; */
+}
+
+.tab-content{
+    width: 78%;
+}
+
+.tab-pane-placeholder{
+    display: grid;
+    align-content: center;
+    height: 100%;
+}
+
+.tab-pane-placeholder>p{
+    margin: auto;
+    width: fit-content;
+    color: #a1a1a1;
+    font-size: 1.4rem;
+}
+
