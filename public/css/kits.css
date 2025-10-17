@@ -21,7 +21,6 @@
 
 .range-guide>p{
     margin: 0;
-    /* font-size: 1rem; */
     color: #a1a1a1;
 }
 
@@ -100,6 +99,19 @@
     /* border-radius: 4px; */
 }
 
+.tab-content::-webkit-scrollbar {
+    width: 2px;
+}
+
+.tab-content::-webkit-scrollbar-track {
+    background: #212529;
+}
+
+.tab-content::-webkit-scrollbar-thumb {
+    background: #d9d9d9;
+    /* border-radius: 4px; */
+}
+
 .tab-content{
     width: 78%;
 }
@@ -117,3 +129,62 @@
     font-size: 1.4rem;
 }
 
+.kit-row{
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.btn-add, .btn-subtract{
+    background-color: #00aac0;
+    border: none;
+    color: white;
+    width: 30px;
+    height: 30px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.btn-add{
+    border-radius: 0px 10px 10px 0px;
+}
+
+.btn-subtract{
+    border-radius: 10px 0px 0px 10px;
+}
+
+.qntd-field{
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 0px;
+}
+
+.un-select{
+    width: fit-content;
+    margin-left: 10px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    padding: 0px 5px;
+}
+
+.desc-field{
+    margin-left: 10px;
+    width: 80%;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    padding: 0px 5px;
+}
+
+.manufacturer-field{
+    margin-left: 10px;
+    width: 14%;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    padding: 0px 5px;
+}
