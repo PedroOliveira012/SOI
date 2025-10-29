@@ -9,10 +9,10 @@
                 <div class="tab-vertical d-flex justify-content-center">
                     <div class="tabs-div">
                         <ul class="nav nav-tabs overflow-y-scroll" id="myTab3" role="tablist">
-                        @foreach ($kit->rangeAmperes as $amps)
+                        @foreach ($kit->set as $set)
                             <li class="nav-item">
-                                <a class="nav-link" id="home-vertical-tab" data-toggle="tab" href="#{{$amps}}-tab" role="tab" aria-controls="home" aria-selected="true">
-                                    {{ $amps }}A
+                                <a class="nav-link text-center" id="home-vertical-tab" data-toggle="tab" href="#{{ $set['item'] }}-tab" role="tab" aria-controls="home" aria-selected="true">
+                                   {{ $set['item'] }}
                                 </a>
                             </li>
                         @endforeach
@@ -22,9 +22,10 @@
                         <div class="tab-pane show active tab-pane-placeholder" role="tabpanel" aria-labelledby="home-vertical-tab">
                             <p>Selecione um kit para a edição</p>
                         </div>
-                    @foreach ($kit->rangeAmperes as $amps)
-                        <div class="tab-pane show" id="{{$amps}}-tab" role="tabpanel" aria-labelledby="home-vertical-tab">
-                            @include("partials.{$kit->name}-form", ['kit' => $kit, 'amps' => $amps])
+                    @foreach ($kit->set as $set)
+                        <div class="tab-pane show" id="{{ $set['item'] }}-tab" role="tabpanel" aria-labelledby="home-vertical-tab">
+                        {{-- {{ dd($set) }} --}}
+                            @include("partials.{$kit->name}-form", ['kit' => $kit, 'set' => $set])
                         </div>
                     @endforeach
                     </div>

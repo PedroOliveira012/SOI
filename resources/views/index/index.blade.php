@@ -43,7 +43,7 @@
                     <a href="{{ url('/home') }}" class="btn btn-dark w-100 mb-3">Home</a>
                 </div>
                 <div>
-                    <a href="{{ url('/kits-editing/home') }}" class="btn btn-dark w-100 mb-3">Edição dos kits</a>
+                    <a href="{{ url('/kits/editing/home') }}" class="btn btn-dark w-100 mb-3">Edição dos kits</a>
                 </div>
             </div>
         </div>

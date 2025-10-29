@@ -1,255 +1,38 @@
-<h4>{{$kit->category[0]}}</h4><br>
-
-<div class="kit-row">
-    {{-- CIRCUIT BREAKER --}}
-    <div class="d-flex align-items-center">
-        <button class="btn btn-subtract">
-            <i class="fa-solid fa-minus"></i>
-        </button>
-        <input class="disabled qntd-field text-center" value={{ $kit->set[0]['qntd'] }} readonly>
-        <button class="btn btn-add">
-            <i class="fa-solid fa-plus"></i>
-        </button>
-    </div>
-
-    <select class="un-select">
-        <option selected>{{ $kit->set[0]['un'] }}</option>
-        <option>m</option>
-        <option>VB</option>
-        <option>%</option>
-        <option>BR</option>
-        <option>kg</option>
-        <option>CJ</option>
-    </select>
-
-    @if (isset($kit->set[0]['code']))
-        <input type="text" class="desc-field" value="{{ $kit->set[0]['desc'] }} - {{ $kit->set[0]['code'] }}">
+<div class="d-flex justify-content-evenly">
+    @if (is_array($kit->category))
+        @foreach ($kit->category as $category)
+            <h4>{{$category}}</h4>
+        @endforeach
     @else
-        <input type="text" class="desc-field" value="{{ $kit->set[0]['desc'] }}">
+        <h4>{{ $kit->category }}</h4><br>
     @endif
-
-    <input type="text" value="{{ $kit->set[0]['manufacturer'] }}" class="manufacturer-field">
 </div>
-
-<div class="kit-row">
-    {{-- CURRENT TRANSFORMER --}}
-    <div class="d-flex align-items-center">
-        <button class="btn btn-subtract">
-            <i class="fa-solid fa-minus"></i>
-        </button>
-        <input class="disabled qntd-field text-center" value={{ $kit->set[1]['qntd'] }} readonly>
-        <button class="btn btn-add">
-            <i class="fa-solid fa-plus"></i>
-        </button>
-    </div>
-    
-    <select class="un-select">
-        <option selected>{{ $kit->set[1]['un'] }}</option>
-        <option>m</option>
-        <option>VB</option>
-        <option>%</option>
-        <option>BR</option>
-        <option>kg</option>
-        <option>CJ</option>
-    </select>
-
-    @if ($amps == 100)
-        @if (isset($kit->set[1]['code']))
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][0] }} - {{ $kit->set[1]['code'][0] }}">
+<hr>
+<form action="{{ url('kits/update', $kit->_id) }}" method="POST">
+    @csrf
+    @method('PUT')
+    {{-- Quantity --}}
+    <div class="set-row">
+        <p class="set-p">Qntd</p>
+        {{-- If the content of $set['qntd'] is an array, "transform" into a string --}}
+        @if (is_array($set['qntd']))
+            @php
+                $itemQty = $set['qntd'];
+                $strQty = implode(', ', $itemQty);
+            @endphp
+            <textarea name="desc" class="qty-textarea">{{ $strQty }}</textarea>
         @else
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][0] }}">
+        {{-- Otherwise, the value is kept --}}
+            <input class="qty-input text-center" value="{{ $set['qntd'] }}" name="qty">
         @endif
-    @elseif ($amps == 160)
-        @if (isset($kit->set[1]['code']))
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][1] }} - {{ $kit->set[1]['code'][0] }}">
-        @else
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][1] }}">
-        @endif    
-    @elseif ($amps == 250)
-        @if (isset($kit->set[1]['code']))
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][2] }} - {{ $kit->set[1]['code'][1] }}">
-        @else
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][2] }}">
-        @endif    
-    @elseif ($amps == 400)
-        @if (isset($kit->set[1]['code']))
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][3] }} - {{ $kit->set[1]['code'][1] }}">
-        @else
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][3] }}">
-        @endif  
-    @elseif ($amps == 630)
-        @if (isset($kit->set[1]['code']))
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][4] }} - {{ $kit->set[1]['code'][1] }}">
-        @else
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][4] }}">
-        @endif 
-    @elseif ($amps == 800)
-        @if (isset($kit->set[1]['code']))
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][5] }} - {{ $kit->set[1]['code'][1] }}">
-        @else
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][5] }}">
-        @endif
-    @elseif ($amps == 1000)
-        @if (isset($kit->set[1]['code']))
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][6] }} - {{ $kit->set[1]['code'][2] }}">
-        @else
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][6] }}">
-        @endif
-    @elseif ($amps == 1250)
-        @if (isset($kit->set[1]['code']))
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][7] }} - {{ $kit->set[1]['code'][3] }}">
-        @else
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][7] }}">
-        @endif    
-    @else
-        @if (isset($kit->set[1]['code']))
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][8] }} - {{ $kit->set[1]['code'][3] }}">
-        @else
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][8] }}">
-        @endif
-    @endif
-    <input type="text" value="{{ $kit->set[1]['manufacturer'] }}" class="manufacturer-field">
-</div>
-
-<div class="kit-row">
-    {{-- POTENCIAL TRANSFORMER --}}
-    <div class="d-flex align-items-center">
-        <button class="btn btn-subtract">
-            <i class="fa-solid fa-minus"></i>
-        </button>
-        <input class="disabled qntd-field text-center" value={{ $kit->set[2]['qntd'] }} readonly>
-        <button class="btn btn-add">
-            <i class="fa-solid fa-plus"></i>
-        </button>
     </div>
 
-    <select class="un-select">
-        <option selected>{{ $kit->set[2]['un'] }}</option>
-        <option>m</option>
-        <option>VB</option>
-        <option>%</option>
-        <option>BR</option>
-        <option>kg</option>
-        <option>CJ</option>
-    </select>
-
-    @if (isset($kit->set[0]['code']))
-        <input type="text" class="desc-field" value="{{ $kit->set[2]['desc'] }} - {{ $kit->set[2]['code'] }}">
-    @else
-        <input type="text" class="desc-field" value="{{ $kit->set[2]['desc'] }}">
-    @endif
-
-    <input type="text" value="{{ $kit->set[2]['manufacturer'] }}" class="manufacturer-field">
-</div>
-
-<div class="kit-row">
-    {{-- TEST BLOCK --}}
-    <div class="d-flex align-items-center">
-        <button class="btn btn-subtract">
-            <i class="fa-solid fa-minus"></i>
-        </button>
-        <input class="disabled qntd-field text-center" value={{ $kit->set[3]['qntd'] }} readonly>
-        <button class="btn btn-add">
-            <i class="fa-solid fa-plus"></i>
-        </button>
-    </div>
-
-    <select class="un-select">
-        <option selected>{{ $kit->set[3]['un'] }}</option>
-        <option>m</option>
-        <option>VB</option>
-        <option>%</option>
-        <option>BR</option>
-        <option>kg</option>
-        <option>CJ</option>
-    </select>
-
-    @if (isset($kit->set[0]['code']))
-        <input type="text" class="desc-field" value="{{ $kit->set[3]['desc'] }} - {{ $kit->set[3]['code'] }}">
-    @else
-        <input type="text" class="desc-field" value="{{ $kit->set[3]['desc'] }}">
-    @endif
-
-    <input type="text" value="{{ $kit->set[3]['manufacturer'] }}" class="manufacturer-field">
-</div>
-
-<div class="kit-row">
-    {{-- MINI CIRCUIT BREAKER --}}
-    <div class="d-flex align-items-center">
-        <button class="btn btn-subtract">
-            <i class="fa-solid fa-minus"></i>
-        </button>
-        <input class="disabled qntd-field text-center" value={{ $kit->set[7]['qntd'] }} readonly>
-        <button class="btn btn-add">
-            <i class="fa-solid fa-plus"></i>
-        </button>
-    </div>
-
-    <select class="un-select">
-        <option selected>{{ $kit->set[7]['un'] }}</option>
-        <option>m</option>
-        <option>VB</option>
-        <option>%</option>
-        <option>BR</option>
-        <option>kg</option>
-        <option>CJ</option>
-    </select>
-
-    @if (isset($kit->set[0]['code']))
-        <input type="text" class="desc-field" value="{{ $kit->set[7]['desc'] }} - {{ $kit->set[7]['code'] }}">
-    @else
-        <input type="text" class="desc-field" value="{{ $kit->set[7]['desc'] }}">
-    @endif
-
-    <input type="text" value="{{ $kit->set[7]['manufacturer'] }}" class="manufacturer-field">
-</div>
-
-<div class="kit-row">
-    {{-- MINI CIRCUIT BREAKER --}}
-    <div class="d-flex align-items-center">
-        <button class="btn btn-subtract">
-            <i class="fa-solid fa-minus"></i>
-        </button>
-        <input class="disabled qntd-field text-center" value="{{ $kit->set[8]['qntd'] }}" readonly>
-        <button class="btn btn-add">
-            <i class="fa-solid fa-plus"></i>
-        </button>
-    </div>
-
-    <select class="un-select">
-        <option selected>{{ $kit->set[8]['un'] }}</option>
-        <option>m</option>
-        <option>VB</option>
-        <option>%</option>
-        <option>BR</option>
-        <option>kg</option>
-        <option>CJ</option>
-    </select>
-
-    @if (isset($kit->set[0]['code']))
-        <input type="text" class="desc-field" value="{{ $kit->set[8]['desc'] }} - {{ $kit->set[8]['code'] }}">
-    @else
-        <input type="text" class="desc-field" value="{{ $kit->set[8]['desc'] }}">
-    @endif
-    
-    <input type="text" value="{{ $kit->set[8]['manufacturer'] }}" class="manufacturer-field">
-</div>
-
-@for ($i = 1; $i < count($kit->set[9]['qntd']); $i++)
-    {{-- CABLE --}}
-    <div class="kit-row">
-        <div class="d-flex align-items-center">
-            <button class="btn btn-subtract">
-                <i class="fa-solid fa-minus"></i>
-            </button>
-            <input class="disabled qntd-field text-center" value="{{ $kit->set[9]['qntd'][$i] }}" readonly>
-            <button class="btn btn-add">
-                <i class="fa-solid fa-plus"></i>
-            </button>
-        </div>
-
-        <select class="un-select">
-            <option selected>{{ $kit->set[9]['un'] }}</option>
+    <hr>
+    {{-- Unit --}}
+    <div class="set-row">  
+        <p class="set-p">Un.</p>
+        <select class="un-select form-select" name="un">
+            <option selected>{{ $set['un'] }}</option>
             <option>m</option>
             <option>VB</option>
             <option>%</option>
@@ -257,334 +40,56 @@
             <option>kg</option>
             <option>CJ</option>
         </select>
-
-        <input type="text" class="desc-field" value="{{ $kit->set[9]['desc'][$i-1] }}">
-
-        <input type="text" value="{{ $kit->set[9]['manufacturer'] }}" class="manufacturer-field">
-    </div>
-@endfor
-
-<div class="kit-row">
-    {{-- ACCESSORIES --}}
-    <div class="d-flex align-items-center">
-        <button class="btn btn-subtract">
-            <i class="fa-solid fa-minus"></i>
-        </button>
-        <input class="disabled qntd-field text-center" value="{{ $kit->set[10]['qntd'] }}" readonly>
-        <button class="btn btn-add">
-            <i class="fa-solid fa-plus"></i>
-        </button>
     </div>
 
-    <select class="un-select">
-        <option selected>{{ $kit->set[10]['un'] }}</option>
-        <option>m</option>
-        <option>VB</option>
-        <option>%</option>
-        <option>BR</option>
-        <option>kg</option>
-        <option>CJ</option>
-    </select>
-
-    <input type="text" class="desc-field" value="{{ $kit->set[10]['desc'] }}">
-
-    <input type="text" value="{{ $kit->set[10]['manufacturer'] }}" class="manufacturer-field">
-</div>
-
-<hr>
-
-<h4>{{$kit->category[1]}}</h4><br>
-
-<div class="kit-row">
-    {{-- CIRCUIT BREAKER --}}
-    <div class="d-flex align-items-center">
-        <button class="btn btn-subtract">
-            <i class="fa-solid fa-minus"></i>
-        </button>
-        <input class="disabled qntd-field text-center" value={{ $kit->set[0]['qntd'] }} readonly>
-        <button class="btn btn-add">
-            <i class="fa-solid fa-plus"></i>
-        </button>
+    <hr>
+    {{-- Description --}}
+    <div class="set-row">
+        <p class="set-p">Descrição</p>
+        {{-- If the content of $set['desc'] is an array, "transform" into a string --}}
+        @if(is_array($set['desc']))
+            @php
+                $itemDesc = $set['desc']; 
+                $strDesc = implode(', ', $itemDesc);
+            @endphp
+            <textarea name="desc" class="desc-textarea">{{ $strDesc }}</textarea>
+        @else
+        {{-- Otherwise, the value is kept --}}
+            <input class="desc-input" value="{{ $set['desc'] }}" name="desc">
+        @endif
     </div>
 
-    <select class="un-select">
-        <option selected>{{ $kit->set[0]['un'] }}</option>
-        <option>m</option>
-        <option>VB</option>
-        <option>%</option>
-        <option>BR</option>
-        <option>kg</option>
-        <option>CJ</option>
-    </select>
+    <hr>
+    {{-- Code --}}
+    <div class="set-row">
+        <p class="set-p">Código</p>
+        {{-- If the content of $set['code'] is an array, "transform" into a string --}}
+        @if (is_array($set['code']))
+            @php
+                $itemCode = $set['code'];
+                $strCode = implode(', ', $itemCode);
+            @endphp
+            <textarea name="code" class="code-textarea">{{ $strCode }}</textarea>
+        @else
+        {{-- Otherwise, the value is kept --}}
+            <input class="code-input" value="{{ $set['code'] }}" name="code">
+        @endif
+    </div>
 
-    @if (isset($kit->set[0]['code']))
-        <input type="text" class="desc-field" value="{{ $kit->set[0]['desc'] }} - {{ $kit->set[0]['code'] }}">
-    @else
-        <input type="text" class="desc-field" value="{{ $kit->set[0]['desc'] }}">
-    @endif
+    <hr>
+    {{-- Manufacturer --}}
+    <div class="set-row">
+        <p class="set-p">Fabricante</p>
+        <input type="text" value="{{ $set['manufacturer'] }}" class="manufacturer-field" name="manufacturer">
+    </div>
 
-    <input type="text" value="{{ $kit->set[0]['manufacturer'] }}" class="manufacturer-field">
-</div>
-
-<div class="kit-row">
-    {{-- CURRENT TRANSFORMER --}}
-    <div class="d-flex align-items-center">
-        <button class="btn btn-subtract">
-            <i class="fa-solid fa-minus"></i>
-        </button>
-        <input class="disabled qntd-field text-center" value={{ $kit->set[1]['qntd'] }} readonly>
-        <button class="btn btn-add">
-            <i class="fa-solid fa-plus"></i>
+    <hr>
+    {{-- Save button --}}
+    <div class="d-flex justify-content-center w-100">
+        <button type="submit" class="btn btn-success save-button">
+            <i class="fa-solid fa-floppy-disk"></i>
+            Salvar
         </button>
     </div>
+</form>
     
-    <select class="un-select">
-        <option selected>{{ $kit->set[1]['un'] }}</option>
-        <option>m</option>
-        <option>VB</option>
-        <option>%</option>
-        <option>BR</option>
-        <option>kg</option>
-        <option>CJ</option>
-    </select>
-
-    @if ($amps == 100)
-        @if (isset($kit->set[1]['code']))
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][0] }} - {{ $kit->set[1]['code'][0] }}">
-        @else
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][0] }}">
-        @endif
-    @elseif ($amps == 160)
-        @if (isset($kit->set[1]['code']))
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][1] }} - {{ $kit->set[1]['code'][0] }}">
-        @else
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][1] }}">
-        @endif    
-    @elseif ($amps == 250)
-        @if (isset($kit->set[1]['code']))
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][2] }} - {{ $kit->set[1]['code'][1] }}">
-        @else
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][2] }}">
-        @endif    
-    @elseif ($amps == 400)
-        @if (isset($kit->set[1]['code']))
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][3] }} - {{ $kit->set[1]['code'][1] }}">
-        @else
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][3] }}">
-        @endif  
-    @elseif ($amps == 630)
-        @if (isset($kit->set[1]['code']))
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][4] }} - {{ $kit->set[1]['code'][1] }}">
-        @else
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][4] }}">
-        @endif 
-    @elseif ($amps == 800)
-        @if (isset($kit->set[1]['code']))
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][5] }} - {{ $kit->set[1]['code'][1] }}">
-        @else
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][5] }}">
-        @endif
-    @elseif ($amps == 1000)
-        @if (isset($kit->set[1]['code']))
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][6] }} - {{ $kit->set[1]['code'][2] }}">
-        @else
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][6] }}">
-        @endif
-    @elseif ($amps == 1250)
-        @if (isset($kit->set[1]['code']))
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][7] }} - {{ $kit->set[1]['code'][3] }}">
-        @else
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][7] }}">
-        @endif    
-    @else
-        @if (isset($kit->set[1]['code']))
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][8] }} - {{ $kit->set[1]['code'][3] }}">
-        @else
-            <input type="text" class="desc-field" value="{{ $kit->set[1]['desc'][8] }}">
-        @endif
-    @endif
-    <input type="text" value="{{ $kit->set[1]['manufacturer'] }}" class="manufacturer-field">
-</div>
-
-<div class="kit-row">
-    {{-- TEST BLOCK --}}
-    <div class="d-flex align-items-center">
-        <button class="btn btn-subtract">
-            <i class="fa-solid fa-minus"></i>
-        </button>
-        <input class="disabled qntd-field text-center" value={{ $kit->set[3]['qntd'] }} readonly>
-        <button class="btn btn-add">
-            <i class="fa-solid fa-plus"></i>
-        </button>
-    </div>
-
-    <select class="un-select">
-        <option selected>{{ $kit->set[3]['un'] }}</option>
-        <option>m</option>
-        <option>VB</option>
-        <option>%</option>
-        <option>BR</option>
-        <option>kg</option>
-        <option>CJ</option>
-    </select>
-
-    @if (isset($kit->set[0]['code']))
-        <input type="text" class="desc-field" value="{{ $kit->set[3]['desc'] }} - {{ $kit->set[3]['code'] }}">
-    @else
-        <input type="text" class="desc-field" value="{{ $kit->set[3]['desc'] }}">
-    @endif
-
-    <input type="text" value="{{ $kit->set[3]['manufacturer'] }}" class="manufacturer-field">
-</div>
-
-<div class="kit-row">
-    {{-- MINI CIRCUIT BREAKER --}}
-    <div class="d-flex align-items-center">
-        <button class="btn btn-subtract">
-            <i class="fa-solid fa-minus"></i>
-        </button>
-        <input class="disabled qntd-field text-center" value={{ $kit->set[7]['qntd'] }} readonly>
-        <button class="btn btn-add">
-            <i class="fa-solid fa-plus"></i>
-        </button>
-    </div>
-
-    <select class="un-select">
-        <option selected>{{ $kit->set[7]['un'] }}</option>
-        <option>m</option>
-        <option>VB</option>
-        <option>%</option>
-        <option>BR</option>
-        <option>kg</option>
-        <option>CJ</option>
-    </select>
-
-    @if (isset($kit->set[0]['code']))
-        <input type="text" class="desc-field" value="{{ $kit->set[7]['desc'] }} - {{ $kit->set[7]['code'] }}">
-    @else
-        <input type="text" class="desc-field" value="{{ $kit->set[7]['desc'] }}">
-    @endif
-
-    <input type="text" value="{{ $kit->set[7]['manufacturer'] }}" class="manufacturer-field">
-</div>
-
-<div class="kit-row">
-    {{-- MINI CIRCUIT BREAKER --}}
-    <div class="d-flex align-items-center">
-        <button class="btn btn-subtract">
-            <i class="fa-solid fa-minus"></i>
-        </button>
-        <input class="disabled qntd-field text-center" value="{{ $kit->set[8]['qntd'] }}" readonly>
-        <button class="btn btn-add">
-            <i class="fa-solid fa-plus"></i>
-        </button>
-    </div>
-
-    <select class="un-select">
-        <option selected>{{ $kit->set[8]['un'] }}</option>
-        <option>m</option>
-        <option>VB</option>
-        <option>%</option>
-        <option>BR</option>
-        <option>kg</option>
-        <option>CJ</option>
-    </select>
-
-    @if (isset($kit->set[0]['code']))
-        <input type="text" class="desc-field" value="{{ $kit->set[8]['desc'] }} - {{ $kit->set[8]['code'] }}">
-    @else
-        <input type="text" class="desc-field" value="{{ $kit->set[8]['desc'] }}">
-    @endif
-    
-    <input type="text" value="{{ $kit->set[8]['manufacturer'] }}" class="manufacturer-field">
-</div>
-
-@for ($i = 0; $i < count($kit->set[9]['qntd']); $i++)
-    
-        {{-- CABLE --}}
-        {{-- Skips the second element --}}
-        @if ($i == 1)
-            @continue
-        @elseif ($i > 1)
-            {{-- From the second element onwards, you need to subtract 1 from the index to syncronize with the desc --}}
-        <div class="kit-row">
-            <div class="d-flex align-items-center">
-                <button class="btn btn-subtract">
-                    <i class="fa-solid fa-minus"></i>
-                </button>
-                <input class="disabled qntd-field text-center" value="{{ $kit->set[9]['qntd'][$i] }}" readonly>
-                <button class="btn btn-add">
-                    <i class="fa-solid fa-plus"></i>
-                </button>
-            </div>
-
-            <select class="un-select">
-                <option selected>{{ $kit->set[9]['un'] }}</option>
-                <option>m</option>
-                <option>VB</option>
-                <option>%</option>
-                <option>BR</option>
-                <option>kg</option>
-                <option>CJ</option>
-            </select>
-
-            <input type="text" class="desc-field" value="{{ $kit->set[9]['desc'][$i-1] }}">
-        
-            <input type="text" value="{{ $kit->set[9]['manufacturer'] }}" class="manufacturer-field">
-        </div>
-        @else
-            {{-- This is the first iteraction so the qntd and desc are syncrinized --}}
-            <div class="kit-row">
-                <div class="d-flex align-items-center">
-                    <button class="btn btn-subtract">
-                        <i class="fa-solid fa-minus"></i>
-                    </button>
-                    <input class="qntd-field text-center" value="{{ $kit->set[9]['qntd'][$i] }}" readonly>
-                    <button class="btn btn-add">
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
-                </div>
-
-                <select class="un-select">
-                    <option selected>{{ $kit->set[9]['un'] }}</option>
-                    <option>m</option>
-                    <option>VB</option>
-                    <option>%</option>
-                    <option>BR</option>
-                    <option>kg</option>
-                    <option>CJ</option>
-                </select>
-
-                <input type="text" class="desc-field" value="{{ $kit->set[9]['desc'][$i] }}">
-            
-                <input type="text" value="{{ $kit->set[9]['manufacturer'] }}" class="manufacturer-field">
-            </div>
-        @endif
-@endfor
-
-<div class="kit-row">
-    {{-- ACCESSORIES --}}
-    <div class="d-flex align-items-center">
-        <button class="btn btn-subtract">
-            <i class="fa-solid fa-minus"></i>
-        </button>
-        <input class="disabled qntd-field text-center" value="{{ $kit->set[10]['qntd'] }}" readonly>
-        <button class="btn btn-add">
-            <i class="fa-solid fa-plus"></i>
-        </button>
-    </div>
-
-    <select class="un-select">
-        <option selected>{{ $kit->set[10]['un'] }}</option>
-        <option>m</option>
-        <option>VB</option>
-        <option>%</option>
-        <option>BR</option>
-        <option>kg</option>
-        <option>CJ</option>
-    </select>
-    
-    <input type="text" class="desc-field" value="{{ $kit->set[10]['desc'] }}">
-
-    <input type="text" value="{{ $kit->set[10]['manufacturer'] }}" class="manufacturer-field">
-</div>

@@ -6,7 +6,7 @@
     <h1 class="m-5 text-center">Edição dos Kits</h1>
     @foreach ($kits as $kit)
 
-    <a href="{{ url('/kits-editing/'.$kit->_id) }}">
+    <a href="{{ url('/kits/editing/'.$kit->_id) }}">
         <div class="kit-card p-4 mb-4">
             <div class="kit-area ">
                 <h2>{{ $kit->area }}</h2>

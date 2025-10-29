@@ -86,6 +86,7 @@
     height: 606px;
 }
 
+/* Scrollbar */
 .tabs-div::-webkit-scrollbar {
     width: 2px;
 }
@@ -112,6 +113,7 @@
     /* border-radius: 4px; */
 }
 
+/* Kits editing */
 .tab-content{
     width: 78%;
 }
@@ -129,62 +131,88 @@
     font-size: 1.4rem;
 }
 
-.kit-row{
+.set-p{
+    width: 20%;
+    margin: 0px;
+}
+
+.set-row{
     display: flex;
     align-items: center;
     margin-bottom: 15px;
+    padding: 0px 10px;
 }
 
-.btn-add, .btn-subtract{
-    background-color: #00aac0;
-    border: none;
-    color: white;
-    width: 30px;
-    height: 30px;
-    display: grid;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-}
-
-.btn-add{
-    border-radius: 0px 10px 10px 0px;
-}
-
-.btn-subtract{
-    border-radius: 10px 0px 0px 10px;
-}
-
-.qntd-field{
-    width: 30px;
+.qty-input{
+    width: 6%;
     height: 30px;
     border: none;
-    border-radius: 0px;
+    border-radius: 5px;
+}
+
+.qty-input:focus-visible{
+    outline: none;
+}
+
+.qty-textarea{
+    width: 20%;
+    height: 60px;
+    border: none;
+    border-radius: 5px;
+    padding: 0px 5px;
 }
 
 .un-select{
-    width: fit-content;
-    margin-left: 10px;
+    width: 6%;
     height: 30px;
     border-radius: 5px;
     border: none;
     padding: 0px 5px;
 }
 
-.desc-field{
-    margin-left: 10px;
-    width: 80%;
+.un-select:focus-visible, .un-select:focus{
+    outline: none !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Posicioning the select icon */
+.form-select{
+    background-position: right .2rem center;
+}
+
+.desc-input, .code-input{
+    width: 70%;
     height: 30px;
     border: none;
     border-radius: 5px;
     padding: 0px 5px;
+}
+
+.desc-textarea, .code-textarea{
+    width: 70%;
+    height: 130px;
+    border: none;
+    border-radius: 5px;
+    padding: 0px 5px;
+}
+
+.desc-field:focus-visible{
+    outline: none;
 }
 
 .manufacturer-field{
-    margin-left: 10px;
-    width: 14%;
+    width: 20%;
     height: 30px;
     border: none;
     border-radius: 5px;
     padding: 0px 5px;
+}
+
+.manufacturer-field:focus-visible{
+    outline: none;
+}
+
+.save-button{
+    width: 15%;
 }
