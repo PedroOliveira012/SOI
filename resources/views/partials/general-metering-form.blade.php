@@ -8,7 +8,8 @@
     @endif
 </div>
 <hr>
-<form action="{{ url('kits/update', $kit->_id) }}" method="POST">
+{{-- <form action="{{ url('kits/update/'.$kit->_id.'/'.$index) }}" method="POST"> --}}
+<form method="POST" action="{{ route('kits-update', ['kit' => $kit->_id, 'index' => $index]) }}">
     @csrf
     @method('PUT')
     {{-- Quantity --}}
@@ -23,7 +24,7 @@
             <textarea name="desc" class="qty-textarea">{{ $strQty }}</textarea>
         @else
         {{-- Otherwise, the value is kept --}}
-            <input class="qty-input text-center" value="{{ $set['qntd'] }}" name="qty">
+            <input class="qty-input text-center" value="{{ $set['qntd'] }}" name="qty-input">
         @endif
     </div>
 
@@ -31,14 +32,15 @@
     {{-- Unit --}}
     <div class="set-row">  
         <p class="set-p">Un.</p>
-        <select class="un-select form-select" name="un">
-            <option selected>{{ $set['un'] }}</option>
-            <option>m</option>
-            <option>VB</option>
-            <option>%</option>
-            <option>BR</option>
-            <option>kg</option>
-            <option>CJ</option>
+        <select class="un-select form-select" name="un-select">
+            <option selected hidden value="{{ $set['un'] }}">{{ $set['un'] }}</option>
+            <option value="PÇ">PÇ</option>
+            <option value="m">m</option>
+            <option value="VB">VB</option>
+            <option value="%">%</option>
+            <option value="BR">BR</option>
+            <option value="kg">kg</option>
+            <option value="CJ">CJ</option>
         </select>
     </div>
 
@@ -55,7 +57,7 @@
             <textarea name="desc" class="desc-textarea">{{ $strDesc }}</textarea>
         @else
         {{-- Otherwise, the value is kept --}}
-            <input class="desc-input" value="{{ $set['desc'] }}" name="desc">
+            <input class="desc-input" value="{{ $set['desc'] }}" name="desc-input">
         @endif
     </div>
 
@@ -72,7 +74,7 @@
             <textarea name="code" class="code-textarea">{{ $strCode }}</textarea>
         @else
         {{-- Otherwise, the value is kept --}}
-            <input class="code-input" value="{{ $set['code'] }}" name="code">
+            <input class="code-input" value="{{ $set['code'] }}" name="code-input">
         @endif
     </div>
 
@@ -80,7 +82,7 @@
     {{-- Manufacturer --}}
     <div class="set-row">
         <p class="set-p">Fabricante</p>
-        <input type="text" value="{{ $set['manufacturer'] }}" class="manufacturer-field" name="manufacturer">
+        <input type="text" value="{{ $set['manufacturer'] }}" class="manufacturer-input" name="manufacturer-input">
     </div>
 
     <hr>
@@ -92,4 +94,3 @@
         </button>
     </div>
 </form>
-    

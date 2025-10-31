@@ -17,4 +17,4 @@ Route::delete('/delete/{project}', [App\Http\Controllers\ProjectController::clas
 //Kits
 Route::get('/kits/editing/home', [App\Http\Controllers\KitsController::class, 'index'])->name('kits-editing-home');
 Route::get('/kits/editing/{kit}', [App\Http\Controllers\KitsController::class, 'edit'])->name('kits-editing-form');
-
+Route::put('/kits/{kit}/{index}', [App\Http\Controllers\KitsController::class, 'update'])->name('kits-update');

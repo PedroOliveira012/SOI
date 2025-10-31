@@ -22,10 +22,13 @@
                         <div class="tab-pane show active tab-pane-placeholder" role="tabpanel" aria-labelledby="home-vertical-tab">
                             <p>Selecione um kit para a edição</p>
                         </div>
-                    @foreach ($kit->set as $set)
+                    @foreach ($kit->set as $index => $set)
                         <div class="tab-pane show" id="{{ $set['item'] }}-tab" role="tabpanel" aria-labelledby="home-vertical-tab">
-                        {{-- {{ dd($set) }} --}}
-                            @include("partials.{$kit->name}-form", ['kit' => $kit, 'set' => $set])
+                            @include("partials.{$kit->name}-form", [
+                                'kit' => $kit, 
+                                'set' => $set, 
+                                'index' => $index
+                            ])
                         </div>
                     @endforeach
                     </div>

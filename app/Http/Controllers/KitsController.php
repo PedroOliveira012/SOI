@@ -54,9 +54,39 @@ class KitsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Kits $kit, $index)
     {
-        //
+        // Validate incoming request data
+        $validatedData = $request->validate([
+            'qty-input' => 'required|numeric',
+            'un-select' => 'required|string',
+            'desc-input' => 'required|string',
+            'code-input' => 'required|string',
+            'manufacturer-input' => 'required|string',
+        ]);
+        
+        // Map request fields to model fields
+        $fieldMap = [
+            'qty-input' => 'qntd',
+            'un-select' => 'un',
+            'desc-input' => 'desc',
+            'code-input' => 'code',
+            'manufacturer-input' => 'manufacturer',
+        ];
+        // Update only the specified set in the 'set' array
+        foreach ($validatedData as $requestKey => $value) {
+            // Check if the request key exists in the field map
+            if (isset($fieldMap[$requestKey])) {
+                // Get the corresponding model field
+                $modelField = $fieldMap[$requestKey];
+                // Create the MongoDB key for the specific index
+                $mongoKey = "set.$index.$modelField";
+                // Update the specific field in the database
+                Kits::where('_id', $kit->_id)->update([$mongoKey => $value]);
+            }
+        }
+
+        return redirect()->back()->with('success', 'Projeto atualizado com sucesso!');
     }
 
     /**
