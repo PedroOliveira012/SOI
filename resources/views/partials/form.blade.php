@@ -1,10 +1,11 @@
-<div class="d-flex justify-content-evenly">
+<div>
     @if (is_array($kit->category))
-        @foreach ($kit->category as $category)
-            <h4>{{$category}}</h4>
-        @endforeach
+        @php
+            $categories = implode(' - ', $kit->category);
+        @endphp
+        <h4 class=" text-center">{{ $categories }}</h4><br>
     @else
-        <h4>{{ $kit->category }}</h4><br>
+        <h4 class=" text-center">{{ $kit->category }}</h4><br>
     @endif
 </div>
 <hr>
@@ -19,9 +20,9 @@
         @if (is_array($set['qntd']))
             @php
                 $itemQty = $set['qntd'];
-                $strQty = implode(', ', $itemQty);
+                $strQty = implode("\n", $itemQty);
             @endphp
-            <textarea name="desc" class="qty-textarea">{{ $strQty }}</textarea>
+            <textarea name="qty-textarea" class="qty-textarea focus-ring focus-ring-info" rows="{{count($kit->set[$index]['qntd'])}}">{{ $strQty }}</textarea>
         @else
         {{-- Otherwise, the value is kept --}}
             <input class="qty-input text-center" value="{{ $set['qntd'] }}" name="qty-input">
@@ -52,9 +53,9 @@
         @if(is_array($set['desc']))
             @php
                 $itemDesc = $set['desc']; 
-                $strDesc = implode(', ', $itemDesc);
+                $strDesc = implode("\n", $itemDesc);
             @endphp
-            <textarea name="desc" class="desc-textarea">{{ $strDesc }}</textarea>
+            <textarea name="desc" class="desc-textarea" rows="{{count($kit->set[$index]['desc'])}}">{{ $strDesc }}</textarea>
         @else
         {{-- Otherwise, the value is kept --}}
             <input class="desc-input" value="{{ $set['desc'] }}" name="desc-input">
@@ -66,12 +67,12 @@
     <div class="set-row">
         <p class="set-p">Código</p>
         {{-- If the content of $set['code'] is an array, "transform" into a string --}}
-        @if (is_array($set['code']))
+        @if ($set['code'] && is_array($set['code']))
             @php
                 $itemCode = $set['code'];
-                $strCode = implode(', ', $itemCode);
+                $strCode = implode("\n", $itemCode);
             @endphp
-            <textarea name="code" class="code-textarea">{{ $strCode }}</textarea>
+            <textarea name="code" class="code-textarea" rows="{{count($kit->set[$index]['code'])}}">{{ $strCode }}</textarea>
         @else
         {{-- Otherwise, the value is kept --}}
             <input class="code-input" value="{{ $set['code'] }}" name="code-input">

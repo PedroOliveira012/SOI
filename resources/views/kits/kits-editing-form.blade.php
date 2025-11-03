@@ -24,7 +24,7 @@
                         </div>
                     @foreach ($kit->set as $index => $set)
                         <div class="tab-pane show" id="{{ $set['item'] }}-tab" role="tabpanel" aria-labelledby="home-vertical-tab">
-                            @include("partials.{$kit->name}-form", [
+                            @include("partials.form", [
                                 'kit' => $kit, 
                                 'set' => $set, 
                                 'index' => $index

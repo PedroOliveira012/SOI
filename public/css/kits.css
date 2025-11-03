@@ -97,7 +97,6 @@
 
 .tabs-div::-webkit-scrollbar-thumb {
     background: #d9d9d9;
-    /* border-radius: 4px; */
 }
 
 .tab-content::-webkit-scrollbar {
@@ -110,7 +109,6 @@
 
 .tab-content::-webkit-scrollbar-thumb {
     background: #d9d9d9;
-    /* border-radius: 4px; */
 }
 
 /* Kits editing */
@@ -150,13 +148,12 @@
     border-radius: 5px;
 }
 
-.qty-input:focus-visible{
+/* .qty-input:focus-visible{
     outline: none;
-}
+} */
 
 .qty-textarea{
     width: 20%;
-    height: 60px;
     border: none;
     border-radius: 5px;
     padding: 0px 5px;
@@ -171,9 +168,9 @@
 }
 
 .un-select:focus-visible, .un-select:focus{
-    outline: none !important;
-    border-color: transparent !important;
-    box-shadow: none !important;
+    outline: #00aac0 auto 1px !important;
+    border-color: #00aac0 !important;
+    box-shadow: #00aac0 1px 1px 1px  !important;
 }
 
 /* Posicioning the select icon */
@@ -191,7 +188,6 @@
 
 .desc-textarea, .code-textarea{
     width: 70%;
-    height: 130px;
     border: none;
     border-radius: 5px;
     padding: 0px 5px;
