@@ -58,33 +58,38 @@ class KitsController extends Controller
     {
         // Validate incoming request data
         $validatedData = $request->validate([
-            'qty-input' => 'required|numeric',
-            'un-select' => 'required|string',
-            'desc-input' => 'required|string',
-            'code-input' => 'required|string',
-            'manufacturer-input' => 'required|string',
+            'qty' => 'required|numeric',
+            'un' => 'required|string',
+            'desc' => 'required|string',
+            'code' => 'required|string',
+            'manufacturer' => 'required|string',
         ]);
-        
+
+        //Check for line breaks and convert to array if found
+        str_contains($validatedData['qty'], "\r\n") ? $qty = explode("\r\n", $validatedData['qty']): $qty = $validatedData['qty'];
+        str_contains($validatedData['desc'], "\r\n") ? $desc = explode("\r\n", $validatedData['desc']): $desc = $validatedData['desc'];
+        str_contains($validatedData['code'], "\r\n") ? $code = explode("\r\n", $validatedData['code']): $code = $validatedData['code'];
+
         // Map request fields to model fields
         $fieldMap = [
-            'qty-input' => 'qntd',
-            'un-select' => 'un',
-            'desc-input' => 'desc',
-            'code-input' => 'code',
-            'manufacturer-input' => 'manufacturer',
+            'qty' => $qty,
+            'un' => $validatedData['un'],
+            'desc' => $desc,
+            'code' => $code,
+            'manufacturer' => $validatedData['manufacturer'],
         ];
-        // Update only the specified set in the 'set' array
-        foreach ($validatedData as $requestKey => $value) {
-            // Check if the request key exists in the field map
-            if (isset($fieldMap[$requestKey])) {
-                // Get the corresponding model field
-                $modelField = $fieldMap[$requestKey];
-                // Create the MongoDB key for the specific index
-                $mongoKey = "set.$index.$modelField";
-                // Update the specific field in the database
-                Kits::where('_id', $kit->_id)->update([$mongoKey => $value]);
-            }
-        }
+
+        // Define the updates array, using dot notation for nested fields
+        $updates = [
+            "set.{$index}.qty" => $qty,
+            "set.{$index}.un" => $validatedData['un'],
+            "set.{$index}.desc" => $desc,
+            "set.{$index}.code" => $code,
+            "set.{$index}.manufacturer" => $validatedData['manufacturer'],
+        ];
+
+        // Execute the update
+        Kits::where('_id', $kit->_id)->update($updates);
 
         return redirect()->back()->with('success', 'Projeto atualizado com sucesso!');
     }

@@ -22,10 +22,10 @@
                 $itemQty = $set['qntd'];
                 $strQty = implode("\n", $itemQty);
             @endphp
-            <textarea name="qty-textarea" class="qty-textarea focus-ring focus-ring-info" rows="{{count($kit->set[$index]['qntd'])}}">{{ $strQty }}</textarea>
+            <textarea name="qty" class="qty-textarea focus-ring focus-ring-info" rows="{{count($kit->set[$index]['qntd'])}}">{{ $strQty }}</textarea>
         @else
         {{-- Otherwise, the value is kept --}}
-            <input class="qty-input text-center" value="{{ $set['qntd'] }}" name="qty-input">
+            <input class="qty-input text-center" value="{{ $set['qntd'] }}" name="qty">
         @endif
     </div>
 
@@ -33,7 +33,7 @@
     {{-- Unit --}}
     <div class="set-row">  
         <p class="set-p">Un.</p>
-        <select class="un-select form-select" name="un-select">
+        <select class="un-select form-select" name="un">
             <option selected hidden value="{{ $set['un'] }}">{{ $set['un'] }}</option>
             <option value="PÇ">PÇ</option>
             <option value="m">m</option>
@@ -58,7 +58,7 @@
             <textarea name="desc" class="desc-textarea" rows="{{count($kit->set[$index]['desc'])}}">{{ $strDesc }}</textarea>
         @else
         {{-- Otherwise, the value is kept --}}
-            <input class="desc-input" value="{{ $set['desc'] }}" name="desc-input">
+            <input class="desc-input" value="{{ $set['desc'] }}" name="desc">
         @endif
     </div>
 
@@ -75,7 +75,7 @@
             <textarea name="code" class="code-textarea" rows="{{count($kit->set[$index]['code'])}}">{{ $strCode }}</textarea>
         @else
         {{-- Otherwise, the value is kept --}}
-            <input class="code-input" value="{{ $set['code'] }}" name="code-input">
+            <input class="code-input" value="{{ $set['code'] }}" name="code">
         @endif
     </div>
 
@@ -83,7 +83,7 @@
     {{-- Manufacturer --}}
     <div class="set-row">
         <p class="set-p">Fabricante</p>
-        <input type="text" value="{{ $set['manufacturer'] }}" class="manufacturer-input" name="manufacturer-input">
+        <input type="text" value="{{ $set['manufacturer'] }}" class="manufacturer-input" name="manufacturer">
     </div>
 
     <hr>
